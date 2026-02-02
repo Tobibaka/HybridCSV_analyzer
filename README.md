@@ -66,8 +66,8 @@ MLP/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/chemical-equipment-visualizer.git
-cd chemical-equipment-visualizer
+git clone https://github.com/Tobibaka/HybridCSV_analyzer.git
+cd HybridCSV_analyzer
 ```
 
 ### 2. Backend Setup

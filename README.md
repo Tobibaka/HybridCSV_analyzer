@@ -3,9 +3,9 @@
 A hybrid Web + Desktop application for data visualization and analytics of chemical equipment parameters. Upload CSV files containing equipment data and view interactive charts, summary statistics, and generate PDF reports.
 
 **REACT-FORONTEND\**
-<img width="1920" height="1080" alt="Screenshot (201)" src="https://github.com/user-attachments/assets/8cb0ef2d-18d5-4d89-a636-5a9fb1ba1baf" />
+<img width="1920" height="1080" alt="IMAGE FOR REACT FRONT END IF NOT VISIBLE VISIT DEMO VIDEO" src="https://github.com/user-attachments/assets/8cb0ef2d-18d5-4d89-a636-5a9fb1ba1baf" />
 **PyQt5 + MATPLOTLIB\**
-<img width="1920" height="1080" alt="Screenshot (198)" src="https://github.com/user-attachments/assets/8cb0ef2d-18d5-4d89-a636-5a9fb1ba1baf" />
+<img width="1920" height="1080" alt="IMAGE FOR PyQt5 + MATPLOTLIB FRONT END IF NOT VISIBLE VISIT DEMO VIDEO" src="https://github.com/user-attachments/assets/d6166d96-107a-4db1-9388-242c7753ebc9" />
 
 
 ## 🚀 Features

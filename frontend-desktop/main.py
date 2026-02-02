@@ -37,11 +37,30 @@ class APIClient:
     def __init__(self):
         self.session = requests.Session()
         self.base_url = API_BASE_URL
+        self._fetch_csrf_token()
+    
+    def _fetch_csrf_token(self):
+        """Fetch CSRF token from the server."""
+        try:
+            # Make a GET request to get the CSRF cookie
+            response = self.session.get(f"{self.base_url}/health/", timeout=5)
+            csrf_token = self.session.cookies.get('csrftoken')
+            if csrf_token:
+                self.session.headers.update({'X-CSRFToken': csrf_token})
+        except:
+            pass
+    
+    def _update_csrf_token(self):
+        """Update CSRF token from cookies after a request."""
+        csrf_token = self.session.cookies.get('csrftoken')
+        if csrf_token:
+            self.session.headers.update({'X-CSRFToken': csrf_token})
     
     def health_check(self):
         """Check if API is available."""
         try:
             response = self.session.get(f"{self.base_url}/health/", timeout=5)
+            self._update_csrf_token()
             return response.status_code == 200
         except:
             return False
@@ -91,11 +110,16 @@ class APIClient:
         """Upload CSV file."""
         with open(file_path, 'rb') as f:
             files = {'file': (os.path.basename(file_path), f, 'text/csv')}
-            data = {'name': name} if name else {}
+            data = {}
+            if name:
+                data['name'] = name
+            else:
+                data['name'] = os.path.splitext(os.path.basename(file_path))[0]
             response = self.session.post(
                 f"{self.base_url}/upload/",
                 files=files,
-                data=data
+                data=data,
+                timeout=60
             )
         return response
     
@@ -122,13 +146,29 @@ class UploadThread(QThread):
     
     def run(self):
         try:
-            response = self.api_client.upload_csv(self.file_path)
+            # Use filename as dataset name
+            name = os.path.splitext(os.path.basename(self.file_path))[0]
+            response = self.api_client.upload_csv(self.file_path, name)
             if response.status_code == 201:
                 self.finished.emit(response.json())
             else:
-                self.error.emit(response.json().get('error', 'Upload failed'))
+                try:
+                    error_data = response.json()
+                    if isinstance(error_data, dict):
+                        error_msg = error_data.get('error', error_data.get('detail', str(error_data)))
+                    else:
+                        error_msg = str(error_data)
+                except:
+                    error_msg = f"Upload failed with status {response.status_code}: {response.text[:200]}"
+                self.error.emit(error_msg)
+        except requests.exceptions.ConnectionError:
+            self.error.emit("Cannot connect to server. Is the backend running on localhost:8000?")
+        except FileNotFoundError:
+            self.error.emit(f"File not found: {self.file_path}")
+        except PermissionError:
+            self.error.emit(f"Permission denied: {self.file_path}")
         except Exception as e:
-            self.error.emit(str(e))
+            self.error.emit(f"Upload error: {str(e)}")
 
 
 class ChartCanvas(FigureCanvas):

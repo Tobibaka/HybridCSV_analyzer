@@ -1,14 +1,22 @@
 # Chemical Equipment Parameter Visualizer
-
 A hybrid Web + Desktop application for data visualization and analytics of chemical equipment parameters. Upload CSV files containing equipment data and view interactive charts, summary statistics, and generate PDF reports.
+## Demo Video
 
-**REACT-FORONTEND\**
+https://github.com/user-attachments/assets/cd2f5d9d-585f-4c06-a95e-04055ccaadfb
+
+
+
+For a 3 minute demonstration of the application, see:
+
+https://drive.google.com/file/d/1bpJyocc7TKrm6ULFbGa5kyx-kKWcz_C2/view?usp=drive_link
+
+*REACT-FORONTEND*
 <img width="1920" height="1080" alt="IMAGE FOR REACT FRONT END IF NOT VISIBLE VISIT DEMO VIDEO" src="https://github.com/user-attachments/assets/8cb0ef2d-18d5-4d89-a636-5a9fb1ba1baf" />
-**PyQt5 + MATPLOTLIB\**
+*PyQt5 + MATPLOTLIB*
 <img width="1920" height="1080" alt="IMAGE FOR PyQt5 + MATPLOTLIB FRONT END IF NOT VISIBLE VISIT DEMO VIDEO" src="https://github.com/user-attachments/assets/d6166d96-107a-4db1-9388-242c7753ebc9" />
 
 
-## 🚀 Features
+## Features
 
 - **CSV Upload** - Upload equipment data via both Web and Desktop interfaces
 - **Data Summary API** - Total counts, averages, and equipment type distribution
@@ -18,7 +26,7 @@ A hybrid Web + Desktop application for data visualization and analytics of chemi
 - **Basic Authentication** - User registration and login system
 - **Cross-Platform** - Works on Windows, macOS, and Linux
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 MLP/
@@ -47,7 +55,7 @@ MLP/
 └── README.md                  # This file
 ```
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology | Purpose |
 |-------|------------|---------|
@@ -58,7 +66,7 @@ MLP/
 | Database | SQLite | Data storage |
 | PDF Generation | ReportLab | PDF reports |
 
-## 📋 Prerequisites
+## Prerequisites
 
 - **Python 3.9+** (for Backend and Desktop app)
 - **Node.js 16+** (for Web frontend)
@@ -144,8 +152,7 @@ pip install -r requirements.txt
 # Run the desktop application
 python main.py
 ```
-
-## 📊 Sample Data
+## Sample Data
 
 A sample CSV file (`sample_equipment_data.csv`) is provided for testing. The expected CSV format:
 
@@ -163,7 +170,7 @@ Pump-P101,Pump,200.0,15.8,45.0
 - **Pressure** - Pressure value (numeric)
 - **Temperature** - Temperature value (numeric)
 
-## 🔌 API Endpoints
+## API Endpoints
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
@@ -179,7 +186,7 @@ Pump-P101,Pump,200.0,15.8,45.0
 | `/api/datasets/<id>/report/` | GET | Download PDF report |
 | `/api/upload/` | POST | Upload CSV file |
 
-## 📱 Usage
+## Usage
 
 ### Web Application
 
@@ -197,7 +204,7 @@ Pump-P101,Pump,200.0,15.8,45.0
 4. Navigate between Charts and Data Table tabs
 5. Download PDF reports using the button
 
-## 🔐 Authentication
+## Authentication
 
 The application supports basic authentication:
 
@@ -207,7 +214,7 @@ The application supports basic authentication:
 
 Note: Authentication is optional. The application works without login.
 
-## 📄 PDF Reports
+## PDF Reports
 
 Generated PDF reports include:
 - Dataset name and generation timestamp
@@ -216,7 +223,7 @@ Generated PDF reports include:
 - Equipment type distribution table
 - Complete equipment data table (up to 50 records)
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Backend Issues
 
@@ -242,7 +249,7 @@ Generated PDF reports include:
 **Error: "matplotlib backend error"**
 - Run `pip install PyQt5 matplotlib` again
 
-## 🚀 Deployment
+## Deployment
 
 ### Backend Deployment (Production)
 
@@ -260,11 +267,11 @@ npm run build
 
 Deploy the `build/` folder to a static hosting service (Netlify, Vercel, etc.)
 
-## 📹 Demo Video
+## Demo Video
 
 For a 2-3 minute demonstration of the application, see: [Demo Video Link]
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
@@ -272,11 +279,11 @@ For a 2-3 minute demonstration of the application, see: [Demo Video Link]
 4. Push to branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 👤 Author
+## Author
 
 Pritom Kalita
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Django REST Framework for the excellent API toolkit
 - React.js and Chart.js for web visualization

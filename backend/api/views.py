@@ -2,10 +2,11 @@ from rest_framework import status, generics, permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.authentication import SessionAuthentication
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.utils.decorators import method_decorator
 from .models import Dataset, EquipmentRecord
 from .serializers import (
@@ -16,6 +17,13 @@ from .serializers import (
     LoginSerializer
 )
 from .utils import parse_csv_data, calculate_summary, generate_pdf_report
+
+
+class CsrfExemptSessionAuthentication(SessionAuthentication):
+    """Session authentication without CSRF enforcement."""
+    
+    def enforce_csrf(self, request):
+        return  # Skip CSRF check
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -107,6 +115,7 @@ class DatasetDetailView(generics.RetrieveDestroyAPIView):
 class UploadCSVView(APIView):
     """Handle CSV file upload."""
     
+    authentication_classes = [CsrfExemptSessionAuthentication]
     permission_classes = [permissions.AllowAny]
     
     def post(self, request):
@@ -243,6 +252,7 @@ def generate_report(request, pk):
 
 @api_view(['GET'])
 @permission_classes([permissions.AllowAny])
+@ensure_csrf_cookie
 def api_health(request):
     """Health check endpoint."""
     return Response({

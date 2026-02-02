@@ -118,10 +118,14 @@ CSRF_TRUSTED_ORIGINS = [
 # REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
 }
+
+# Disable CSRF for API endpoints (for desktop app support)
+CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_SAMESITE = None
